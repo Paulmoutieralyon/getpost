@@ -1,28 +1,20 @@
-var express = require("express");
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/*  page. */
-router.get("/", function(req, res, next) {
-  res.render("index", { title: "Express" });
+
+router.get('/',(req, res, next) => {
+  res.render('index', { title: 'Express' });
 });
 
-/*  URL */
-router.get("/article-:numeroArticle(\\d+)", (req, res) => {
-  console.log(req.params.numeroArticle); // return article number
-  res.send("Coucou la famille");
+router.get('/forms-:id(101)',(req, res, next) => {
+  console.log(req.query.level);
+  console.log(req.params.id);
+  res.send(`Use Postman and test route http://localhost:3000/forms-101?level=easy check console for GET !!!`);
 });
 
-/*  link */
-router.get("/forms-:numeroForm(\\d+)", (req, res) => {
-  console.log(req.params.numeroForm); // return 101
-  console.log(req.query.level); // return "easy" 
-  res.send(`Le paramètre est: ${req.params.numeroForm} c'est ${req.query.level}!`);
-});
-
-/*  name */
-router.post("/forms-:numeroForm(\\d+)", (req, res) => {
-  console.log(req.params.numeroForm); // return name en post
-  console.log(req.body.name); // return name
+router.post('/forms-:id(101)', (req, res, next) => {
+  console.log(req.body);
+  res.json(req.body);
 });
 
 module.exports = router;
